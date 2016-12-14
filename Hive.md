@@ -14,7 +14,7 @@ b. CREATE TABLE records (year STRING, temperature INT, quality INT)
     ROW FORMAT DELIMITED
     FIELDS TERMINATED BY '\t'; 
     (Hive expects there to be three fields in each row, corresponding to the table columns, with fields 
-     separated by tabs and rows by newlines.)
+     separated by tabs and rows by newlines)
 c. LOAD DATA LOCAL INPATH 'input/ncdc/micro-tab/sample.txt'
     OVERWRITE INTO TABLE records;
 d. hive> select * from records;
