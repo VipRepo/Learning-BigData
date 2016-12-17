@@ -1,0 +1,21 @@
+
+
+
+Replication in HDFS:
+
+1. Reliability of data is maintained with the help of replication technique.
+2. It stores the file as sequence of blocks, all blocks in a file except the last block are the same size.
+3. It also make data as fault taularant.
+4. The block size and replication factor are configurable per file. An application can specify the number of replicas of a file. 
+   Replication factor of file also can be changed later after it creation.
+5. Files in HDFS are write-once and have strictly one writer at any time.
+6. In HDFS data nodes send heartbeat and blockreport preriodically to name node. heartbeat implies that node is functioning properly 
+   and blockreport contains the list of all blocks on that node.
+>Replica Placement: If replication factor is three then one replica on local node and 2nd on different remote rack. And 3 rd one 
+  will also on different node of remote rack.
+>Replica selection: closest node will be selected for read. Here closest means that bandwidth between two nodes. However calculating 
+  bandwidth would be difficult.So in HDFS network is represented as tree and distance between two node would be sum of their distance to 
+  their common ancestor. Levels in tree represents the data centers, racks, nodes.
+> Safe mode: On startup, name node enters the safe mode. replication of blocks does not occur in this mode. Data node sends the periodic 
+  report to name node and name node updates all information. After configurable percentage of safely blocks are updated plus extra 30 sec , 
+  name node exits the safe mode. it then replicates the block which are under replicated. 
