@@ -1,0 +1,15 @@
+Some stats: (KB > MB > GB > TB > PB)
+
+Facebook daily logs: 60 TB
+Google Web Index: 10+ PB
+
+Time to read 1 TB data assuming disc speed is 100MB/s on single machine: 1* 1024 * 1024/100 =~ 10485 sec = 3 hrs
+
+Spark : Computing framework
+Spark components: Spark SQL, Spark streaming, MLib/ML, GraphX, Apache Spark
+
+# Apache Spark DataFrames:
+1. Data frames are immutable once constructed.
+2. It adds the ability to parallize the operations.
+
+[Data Source]/[collections] => [Data Frames] => [Transformation(select/filter)] => [Actions(show/count)]
