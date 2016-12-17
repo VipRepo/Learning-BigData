@@ -13,3 +13,14 @@ Spark components: Spark SQL, Spark streaming, MLib/ML, GraphX, Apache Spark
 2. It adds the ability to parallize the operations.
 
 [Data Source]/[collections] => [Data Frames] => [Transformation(select/filter)] => [Actions(show/count)]
+
+
+Column transformation on data frames:
+1. df.select(*)
+2. df.select('name', 'age')
+3. df.select(df.name, (df.age+10).alias('age'))
+
+User Defined transformation on data frames:
+1. >> from pyspark.sql.types import IntegerType
+   >> slen = udf(lambda s: len(s), IntegerType())
+   >> df.select(slen(df.name).alias('slen'))
