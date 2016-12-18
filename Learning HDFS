@@ -11,11 +11,19 @@ Replication in HDFS:
 5. Files in HDFS are write-once and have strictly one writer at any time.
 6. In HDFS data nodes send heartbeat and blockreport preriodically to name node. heartbeat implies that node is functioning properly 
    and blockreport contains the list of all blocks on that node.
->Replica Placement: If replication factor is three then one replica on local node and 2nd on different remote rack. And 3 rd one 
+> Replica Placement: If replication factor is three then one replica on local node and 2nd on different remote rack. And 3 rd one 
   will also on different node of remote rack.
->Replica selection: closest node will be selected for read. Here closest means that bandwidth between two nodes. However calculating 
+> Replica selection: closest node will be selected for read. Here closest means that bandwidth between two nodes. However calculating 
   bandwidth would be difficult.So in HDFS network is represented as tree and distance between two node would be sum of their distance to 
   their common ancestor. Levels in tree represents the data centers, racks, nodes.
 > Safe mode: On startup, name node enters the safe mode. replication of blocks does not occur in this mode. Data node sends the periodic 
   report to name node and name node updates all information. After configurable percentage of safely blocks are updated plus extra 30 sec , 
   name node exits the safe mode. it then replicates the block which are under replicated. 
+  
+Persistence of File metadata:
+
+Namenode maintain transaction log or edit log which persistently record every change occur to file system metadata. It also maintain 
+FsImage which contains entire file system namespace and mapping of block to file. When name node starts up it load the FsImage in memory
+and applies all transactions from edit log to in-memory representation of FsImage and flushes out new version of FsImage to disk. This 
+process is called checkpoint. Checkpoint happens at startup only.
+
